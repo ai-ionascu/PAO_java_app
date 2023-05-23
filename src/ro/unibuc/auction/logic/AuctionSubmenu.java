@@ -1,21 +1,20 @@
-package ro.unibuc.auction.services;
+package ro.unibuc.auction.logic;
 import java.util.Scanner;
-import ro.unibuc.auction.models.Product;
 
-public class ProductSubmenu implements Submenu {
+public class AuctionSubmenu implements Submenu {
     private Scanner scanner;
 
-    public ProductSubmenu(Scanner scanner) {
+    public AuctionSubmenu(Scanner scanner) {
         this.scanner = scanner;
     }
 
     @Override
     public void display() {
-        System.out.println("Product Submenu");
-        System.out.println("1. Show All");
-        System.out.println("2. New");
-        System.out.println("3. Update");
-        System.out.println("4. Delete");
+        System.out.println("Auction Submenu");
+        System.out.println("2. Live Auctions");
+        System.out.println("3. Closed Auctions");
+        System.out.println("1. Start Auction");
+        System.out.println("4. Delete Auction");
         System.out.println("5. Back");
 
         System.out.print("Select option: ");
@@ -39,3 +38,4 @@ public class ProductSubmenu implements Submenu {
         }
     }
 }
+

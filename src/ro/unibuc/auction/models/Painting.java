@@ -5,9 +5,9 @@ public class Painting extends Product {
     private String style;
     private String medium;
 
-    public Painting(String name, Seller seller, String description, String state, String payment,
+    public Painting(int id, String name, Seller seller, String description, String state, String payment,
                     String author, String style, String medium) {
-        super(name, seller, description, state, payment);
+        super(id, name, seller, description, state, payment);
         this.author = author;
         this.style = style;
         this.medium = medium;

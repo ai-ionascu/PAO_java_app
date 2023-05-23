@@ -5,9 +5,9 @@ public class Furniture extends Product {
     private String room;
     private String color;
 
-    public Furniture(String name, Seller seller, String description, String state, String payment, String material,
+    public Furniture(int id, String name, Seller seller, String description, String state, String payment, String material,
                      String room, String color) {
-        super(name, seller, description, state, payment);
+        super(id, name, seller, description, state, payment);
         this.material = material;
         this.room = room;
         this.color = color;

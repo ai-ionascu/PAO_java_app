@@ -1,13 +1,15 @@
 package ro.unibuc.auction.models;
 
 public class Product {
+    private int id;
     private String name;
     private Seller seller;
     private String description;
     private String state;
     private String payment;
 
-    public Product(String name, Seller seller, String description, String state, String payment) {
+    public Product(int id, String name, Seller seller, String description, String state, String payment) {
+        this.id = id;
         this.name = name;
         this.seller = seller;
         this.description = description;

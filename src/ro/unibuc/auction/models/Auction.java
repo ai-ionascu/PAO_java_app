@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Auction {
-    private String id;
+    private int id;
     private Product product;
     private List<Bid> bidsList;
     private String startTime;
@@ -12,7 +12,7 @@ public class Auction {
     private String status;
     private Buyer winner;
 
-    public Auction(String id, Product product, String startTime, String endTime) {
+    public Auction(int id, Product product, String startTime, String endTime) {
         this.id = id;
         this.product = product;
         this.startTime = startTime;
@@ -21,11 +21,11 @@ public class Auction {
         this.status = "Active";
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

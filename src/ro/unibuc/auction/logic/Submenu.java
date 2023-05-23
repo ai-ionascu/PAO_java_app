@@ -1,4 +1,4 @@
-package ro.unibuc.auction.services;
+package ro.unibuc.auction.logic;
 
 public interface Submenu {
     void display();
