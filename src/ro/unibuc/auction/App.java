@@ -5,9 +5,10 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Scanner;
 import ro.unibuc.auction.db.dbCon;
 import ro.unibuc.auction.models.*;
-//import ro.unibuc.auction.services.*;
+import ro.unibuc.auction.services.*;
 
 public class App {
     public static void main(String[] args) {
@@ -31,39 +32,51 @@ public class App {
         }
         con_object.closeConnection();
 
-        // Create Seller object
-        Seller seller = new Seller("sellerUser", "gigi.vanzatoru@example.com", "Gigi", "Vanzatoru");
+        Scanner scanner = new Scanner(System.in);
+        boolean exit = false;
 
-        // Create Product object
-        Product product = new Product("Product 1", seller, "Description", "New", "Card");
+        while (!exit) {
+            System.out.println("Menu");
+            System.out.println("1. Product");
+            System.out.println("2. Auction");
+            System.out.println("3. User");
+            System.out.println("4. Exit");
 
-        // Create Auction object
-        Auction auction = new Auction("Auction 1", product, "2023-05-22 10:00", "2023-05-23 10:00");
+            System.out.print("Select Option: ");
+            int option = scanner.nextInt();
 
-        // Create Buyer object
-        Buyer buyer = new Buyer("buyerUser", "titi.cumparatoru@example.com", "Titi", "Cumparatoru");
+            switch (option) {
+                case 1:
+                    // Product submenu
+                    Submenu productSubmenu = new ProductSubmenu(scanner);
+                    productSubmenu.display();
 
-        // Add bid to auction object
-        auction.addBid(buyer, 100.0, "2023-05-22 11:30");
-        auction.addBid(buyer, 150.0, "2023-05-22 12:00");
+                    int productOption = scanner.nextInt();
+                    productSubmenu.handleOption(productOption);
+                    break;
+                case 2:
+                    // Auction submenu
+                    Submenu auctionSubmenu = new AuctionSubmenu(scanner);
+                    auctionSubmenu.display();
 
-        // Close auction
-        auction.closeAuction(buyer);
+                    int auctionOption = scanner.nextInt();
+                    auctionSubmenu.handleOption(auctionOption);
+                    break;
+                case 3:
+                    // User submenu
+                    Submenu userSubmenu = new UserSubmenu(scanner);
+                    userSubmenu.display();
 
-        // Display auction details
-        System.out.println("Auction ID: " + auction.getId());
-        System.out.println("Product: " + auction.getProduct().getName());
-        System.out.println("Start Time: " + auction.getStartTime());
-        System.out.println("End Time: " + auction.getEndTime());
-        System.out.println("Status: " + auction.getStatus());
-        System.out.println("Winner: " + auction.getWinner().getFirstName() + " " + auction.getWinner().getLastName());
-
-        // Display bids
-        List<Bid> bids = auction.getBidsList();
-        for (Bid bid : bids) {
-            // exemplu downcasting
-            Buyer bidder = (Buyer) bid.getBidder();
-            System.out.println("Bid: " + bid.getPrice() + " by " + bidder.getFirstName() + " " + bidder.getLastName() + " at " + bid.getTimestamp());
+                    int userOption = scanner.nextInt();
+                    userSubmenu.handleOption(userOption);
+                    break;
+                case 4:
+                    // Exit
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Error, please make a valid selection.");
+            }
         }
     }
 }
