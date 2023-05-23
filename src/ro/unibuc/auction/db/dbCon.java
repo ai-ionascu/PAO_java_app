@@ -10,9 +10,9 @@ public class dbCon {
 
     private static dbCon instance;
     private Connection connection;
-    String url = System.getenv("DB_URL");
-    String username = System.getenv("DB_USER");
-    String password = System.getenv("DB_PASS");
+    private String url = System.getenv("DB_URL");
+    private String username = System.getenv("DB_USER");
+    private String password = System.getenv("DB_PASS");
     private dbCon() {
         try {
             String driver = "com.mysql.cj.jdbc.Driver";
