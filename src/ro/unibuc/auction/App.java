@@ -36,37 +36,35 @@ public class App {
             System.out.println("1. Product");
             System.out.println("2. Auction");
             System.out.println("3. User");
-            System.out.println("4. Exit");
+            System.out.println("0. Exit");
 
             System.out.print("Select Option: ");
             int option = scanner.nextInt();
+            scanner.nextLine();
 
             switch (option) {
                 case 1:
                     // Product submenu
                     Submenu productSubmenu = new ProductSubmenu(scanner);
                     productSubmenu.display();
-
-                    int productOption = scanner.nextInt();
-                    productSubmenu.handleOption(productOption);
+//                    int productOption = scanner.nextInt();
+                    productSubmenu.handleOption(option);
                     break;
                 case 2:
                     // Auction submenu
                     Submenu auctionSubmenu = new AuctionSubmenu(scanner);
                     auctionSubmenu.display();
-
-                    int auctionOption = scanner.nextInt();
-                    auctionSubmenu.handleOption(auctionOption);
+//                    int auctionOption = scanner.nextInt();
+                    auctionSubmenu.handleOption(option);
                     break;
                 case 3:
                     // User submenu
                     Submenu userSubmenu = new UserSubmenu(scanner);
                     userSubmenu.display();
-
-                    int userOption = scanner.nextInt();
-                    userSubmenu.handleOption(userOption);
+//                    int userOption = scanner.nextInt();
+                    userSubmenu.handleOption(option);
                     break;
-                case 4:
+                case 0:
                     // Exit
                     exit = true;
                     break;

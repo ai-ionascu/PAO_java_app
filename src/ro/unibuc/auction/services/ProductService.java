@@ -21,7 +21,7 @@ public class ProductService implements CRUDService <Product> {
     }
 
     @Override
-    public void update(Product product) {
+    public void update(Product oldProduct, Product newProduct) {
     }
 
     @Override

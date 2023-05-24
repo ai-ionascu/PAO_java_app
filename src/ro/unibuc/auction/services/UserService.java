@@ -9,16 +9,19 @@ import java.sql.*;
 
 public class UserService implements CRUDService <User> {
     private List<User> userList;
+    dbCon con_object;
+    Connection connection;
     public UserService() {
         this.userList = new ArrayList<>();
+        this.con_object = dbCon.getInstance();
+        this.connection = con_object.getConnection();
     }
 
     @Override
     public void create(User user) {
-        dbCon con_object = dbCon.getInstance();
-        Connection connection = con_object.getConnection();
+
         try {
-            String selectQuery = "SELECT COUNT(*) FROM users WHERE name = ?";
+            String selectQuery = "SELECT COUNT(*) FROM user WHERE username = ?";
             PreparedStatement selectStatement = connection.prepareStatement(selectQuery);
             selectStatement.setString(1, user.getUsername());
             ResultSet resultSet = selectStatement.executeQuery();
@@ -44,14 +47,11 @@ public class UserService implements CRUDService <User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        con_object.closeConnection();
+//        con_object.closeConnection();
     }
 
     @Override
     public List<User> read() {
-        List<User> userList = new ArrayList<>();
-        dbCon con_object = dbCon.getInstance();
-        Connection connection = con_object.getConnection();
         try {
             String selectQuery = "SELECT * FROM user";
             Statement selectStatement = connection.createStatement();
@@ -69,19 +69,16 @@ public class UserService implements CRUDService <User> {
         }
 //        con_object.closeConnection();
         return userList;
-
     }
 
     @Override
-    public void update(User user) {
-        dbCon con_object = dbCon.getInstance();
-        Connection connection = con_object.getConnection();
+    public void update(User oldUser, User newUser) {
         try {
-            String updateQuery = "UPDATE users SET username = ?, email = ? WHERE username = ?";
+            String updateQuery = "UPDATE user SET username = ?, email = ? WHERE username = ?";
             PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
-            updateStatement.setString(1, user.getUsername());
-            updateStatement.setString(2, user.getEmail());
-            updateStatement.setString(3, user.getUsername());
+            updateStatement.setString(1, newUser.getUsername());
+            updateStatement.setString(2, newUser.getEmail());
+            updateStatement.setString(3, oldUser.getUsername());
 
             int rowsUpdated = updateStatement.executeUpdate();
             if (rowsUpdated > 0) {
@@ -92,13 +89,11 @@ public class UserService implements CRUDService <User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        con_object.closeConnection();
+//        con_object.closeConnection();
     }
 
     @Override
     public void delete(User user) {
-        dbCon con_object = dbCon.getInstance();
-        Connection connection = con_object.getConnection();
         try {
             String deleteQuery = "DELETE FROM user WHERE username = ?";
             PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery);
@@ -113,6 +108,6 @@ public class UserService implements CRUDService <User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        con_object.closeConnection();
+//        con_object.closeConnection();
     }
 }
